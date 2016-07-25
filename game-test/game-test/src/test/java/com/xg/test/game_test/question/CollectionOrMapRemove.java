@@ -22,6 +22,13 @@ public class CollectionOrMapRemove {
 		//			}
 		//		}
 		//	   error code end
+		for (int i = 0; i < ramdomFilledList.size(); i++) {
+			String string = ramdomFilledList.get(i);
+			if (string.endsWith("3")) {
+				ramdomFilledList.remove(i);
+			}
+		}
+		System.out.println(ramdomFilledList);
 		for (Iterator<String> iterator = ramdomFilledList.iterator(); iterator.hasNext();) {
 			String string = iterator.next();
 			if (string.endsWith("3")) {
