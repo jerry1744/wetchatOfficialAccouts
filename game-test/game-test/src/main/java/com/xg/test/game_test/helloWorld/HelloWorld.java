@@ -1,7 +1,8 @@
 package com.xg.test.game_test.helloWorld;
 
 /**
- *
+ * Hello World 
+ * myself-introduction
  * @auther qikai
  * @date 2016年7月25日
  */
