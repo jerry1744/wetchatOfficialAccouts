@@ -1,7 +1,6 @@
 package com.xg.test.game_test.question;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,15 +30,16 @@ public class CollectionOrMapRemove {
 		System.out.println(ramdomFilledList);
 		for (Iterator<String> iterator = ramdomFilledList.iterator(); iterator.hasNext();) {
 			String string = iterator.next();
-			if (string.endsWith("3")) {
+			if (string.endsWith("4")) {
 				System.out.println("remove");
 				iterator.remove();
 			}
 		}
+		System.out.println(ramdomFilledList);
 		Iterator<String> iterator = ramdomFilledList.iterator();
 		while (iterator.hasNext()) {
 			String next = iterator.next();
-			if (next.endsWith("3")) {
+			if (next.endsWith("5")) {
 				System.out.println("remove");
 				iterator.remove();
 			}
