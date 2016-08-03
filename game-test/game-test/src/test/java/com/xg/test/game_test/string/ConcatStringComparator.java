@@ -20,6 +20,7 @@ public class ConcatStringComparator {
 		comparator.testStringFormat();
 	}
 
+	@SuppressWarnings("unused")
 	public void testPlus() {
 		String s;
 		long ts = System.currentTimeMillis();
@@ -30,6 +31,7 @@ public class ConcatStringComparator {
 		System.out.println(String.format("+ cost {%s} ms", te - ts));
 	}
 
+	@SuppressWarnings("unused")
 	public void testConcat() {
 		String s;
 		long ts = System.currentTimeMillis();
@@ -51,6 +53,7 @@ public class ConcatStringComparator {
 	//		System.out.println(String.format("StringUtils.join cost {%s} ms", te - ts));
 	//	}
 
+	@SuppressWarnings("unused")
 	public void testStringBuffer() {
 		String s;
 		long ts = System.currentTimeMillis();
@@ -63,6 +66,7 @@ public class ConcatStringComparator {
 		System.out.println(String.format("StringBuffer cost {%s} ms", te - ts));
 	}
 
+	@SuppressWarnings("unused")
 	public void testStringBuilder() {
 		String s;
 		long ts = System.currentTimeMillis();
@@ -75,6 +79,7 @@ public class ConcatStringComparator {
 		System.out.println(String.format("StringBuilder cost {%s} ms", te - ts));
 	}
 
+	@SuppressWarnings("unused")
 	public void testStringFormat() {
 		String str;
 		long ts = System.currentTimeMillis();

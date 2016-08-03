@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName" default-lazy-init="false">
+
+	<!-- 国际化,并且可以批定文件编码,可以使用classpath: 或者WEB-INF/ 前缀 -->
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
+		<property name="basenames"> <list> <value>classpath:i18n/messages</value> 
+		<value>classpath:ValidationMessages</value> </list> </property> <property 
+		name="defaultEncoding" value="UTF-8"/> <property name="cacheSeconds" value="60"/> 
+		</bean> -->
+	<!-- 应用属性文件读入 -->
+	<bean id="applicationProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>activemq.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 用于持有applicationProperties,将properties转变为静态方法使用,PropertiesHolder.getProperty("somekey") -->
+	<!--
+	<bean id="propertiesHolder" class="com.xg.game.common.spring.PropertiesHolder">
+		<property name="properties" ref="applicationProperties" />
+	</bean>
+	-->
+	<!-- PropertyPlaceholderConfigurer,用于spring ${placeholder}的解析 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="properties" ref="applicationProperties" />
+	</bean>
+
+	<!-- 激活 @Required @Autowired,JSR 250's @PostConstruct, @PreDestroy and @Resource等标注 -->
+	<!-- 注解 -->
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.xg.test"
+		annotation-config="true">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.RestController" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+
+	<!-- 支持 @AspectJ 标记 
+	<aop:aspectj-autoproxy />-->
+	<!-- 
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	 -->
+	<!-- 用于持有ApplicationContext,可以使用ApplicationContextHolder.getBean('xxxx')的静态方法得到spring 
+		bean对象 -->
+	<bean class="com.xg.test.game_test.spring.SpringContextContainer"
+		lazy-init="false" />
+
+	<!-- JSR303 Validator定义
+ 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" /> -->
+</beans>
