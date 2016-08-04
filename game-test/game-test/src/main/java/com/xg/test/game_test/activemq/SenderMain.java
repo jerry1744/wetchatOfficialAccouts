@@ -16,10 +16,19 @@ public class SenderMain {
 	public static void main(String[] args) throws Exception {
 		new ClassPathXmlApplicationContext("classpath*:applicationContext.xml");
 		ActivemqSender sender = ActivemqSender.getInstance();
+		int index = 0;
+		long start = System.currentTimeMillis();
+		;
 		for (int i = 0; i < 100000; i++) {
 			long now = System.currentTimeMillis();
 			sender.senderMsg("this_is_a_message_for_test_and_no_is_" + i + "sender_time_is \t" + now);
+			if (now - start >= 1000) {
+				break;
+			}
+			Thread.sleep(1);
+			index++;
 		}
+		System.out.println(index);
 	}
 
 }

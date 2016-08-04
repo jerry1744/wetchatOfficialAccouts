@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd "
+	default-autowire="byName">
+    
+    <!-- JMS发送连接池配置 -->
+    <bean id="sed_mqPoolConnectionFactory" class="org.apache.activemq.jms.pool.PooledConnectionFactory" destroy-method="stop">
+        <property name="connectionFactory" ref="mqConnectionFactory">
+        </property>
+        <property name="maxConnections" value="10"></property>
+        <property name="maximumActiveSessionPerConnection" value="50"></property>
+        <property name="idleTimeout" value="60000"></property>
+    </bean>
+    
+    <!-- 定义消息队列 -->
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="${topicname}" />
+	</bean>
+    
+	<!-- JMS PTP MODEL -->
+	<!-- PTP connection factory -->
+	<bean id="mqConnectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${sender.tcp.url}" />
+		<!-- <property name="brokerURL" value="vm://normandy.notify" /> -->
+		<property name="useAsyncSend" value="true" />
+		<property name="userName" value="${con.username}" />
+		<property name="password" value="${con.password}" />
+		<property name="transportListener" ref="myselfTransPortListener"/>
+	</bean>
+	
+	<!-- 消息转换器 -->
+	<bean id="stringMessageConvert" class="com.xg.test.game_test.activemq.convert.StringMessageConvert" />
+	<!-- 自定义TransportListener -->
+	<bean id="myselfTransPortListener" class="com.xg.test.game_test.activemq.listener.MyTransprotListener"/>
+	
+</beans> 

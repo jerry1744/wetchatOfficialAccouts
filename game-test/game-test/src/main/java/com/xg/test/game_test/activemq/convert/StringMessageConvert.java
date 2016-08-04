@@ -8,8 +8,6 @@ import org.springframework.jms.support.converter.MessageConversionException;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
-import com.xg.test.game_test.log.MyLoggerFactory;
-
 /**
  * String类型消息转换器
  * @auther qikai
@@ -25,7 +23,7 @@ public class StringMessageConvert implements MessageConverter {
 
 	@Override
 	public Message toMessage(Object arg0, Session arg1) throws JMSException, MessageConversionException {
-		MyLoggerFactory.commonLog.info("发送日志: " + arg0);
+		//MyLoggerFactory.commonLog.info("发送日志: " + arg0);
 		return arg1.createTextMessage((String) arg0);
 	}
 }

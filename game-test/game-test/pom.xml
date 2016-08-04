@@ -19,7 +19,7 @@
 		<slf4j.version>1.7.13</slf4j.version>
 		<logback.version>1.1.3</logback.version>
 		
-		<org.apache.activemq.version>5.7.0</org.apache.activemq.version>
+		<org.apache.activemq.version>5.9.0</org.apache.activemq.version>
 		
 		
 		
@@ -176,15 +176,19 @@
 
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
+			<artifactId>activemq-client</artifactId>
 			<version>${org.apache.activemq.version}</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.apache.activemq</groupId>
-		  <artifactId>activemq-pool</artifactId>
-		  <version>5.12.1</version>
+		  <artifactId>activemq-spring</artifactId>
+		  <version>${org.apache.activemq.version}</version>
 		</dependency>
-
+		<dependency>
+		  <groupId>org.apache.activemq</groupId>
+		  <artifactId>activemq-pool</artifactId>
+		  <version>${org.apache.activemq.version}</version>
+		</dependency>
 
 	</dependencies>
 </project>

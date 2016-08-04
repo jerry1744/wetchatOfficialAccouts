@@ -14,4 +14,6 @@ public class MyLoggerFactory {
 	public final static Logger commonLog = LoggerFactory.getLogger("loggers.commonlog");
 	
 	public final static Logger errorlog = LoggerFactory.getLogger("loggers.errorlog");
+	
+	public final static Logger consoleLog = LoggerFactory.getLogger("loggers.consolelog");
 }

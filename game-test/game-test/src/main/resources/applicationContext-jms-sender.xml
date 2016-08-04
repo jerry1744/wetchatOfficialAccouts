@@ -8,32 +8,10 @@
     http://www.springframework.org/schema/context/spring-context-2.5.xsd "
 	default-autowire="byName">
 
-
-	<bean id="sed_mqPoolConnectionFactory" class="org.apache.activemq.jms.pool.PooledConnectionFactory" destroy-method="stop">
-        <property name="connectionFactory" ref="sed_mqConnectionFactory">
-        </property>
-        <property name="maxConnections" value="10"></property>
-        <property name="maximumActiveSessionPerConnection" value="50"></property>
-        <property name="idleTimeout" value="60000"></property>
-    </bean>
-    
-	<!-- JMS PTP MODEL -->
-	<!-- PTP connection factory -->
-	<bean id="sed_mqConnectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
-		<property name="brokerURL" value="${sender.tcp.url}" />
-		<!-- <property name="brokerURL" value="vm://normandy.notify" /> -->
-		<property name="useAsyncSend" value="true" />
-		<property name="userName" value="${con.username}" />
-		<property name="password" value="${con.password}" />
-	</bean>
-	<!-- 定义消息队列 -->
-	<bean id="sed_topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
-		<constructor-arg value="${topicname}" />
-	</bean>
 	<!-- PTP jms模板 -->
 	<bean id="jmsTemplate_sender" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="sed_mqPoolConnectionFactory" />
-		<property name="defaultDestination" ref="sed_topicDestination" />
+		<property name="defaultDestination" ref="topicDestination" />
 		<property name="messageConverter" ref="stringMessageConvert" />
 		<property name="pubSubDomain" value="true" />
 		<property name="explicitQosEnabled" value="true" />
@@ -47,7 +25,5 @@
         Session.DUPS_OK_ACKNOWLEDGE 不必必须签收，消息可能会重复发送  
         -->
 	</bean>
-	
-	<bean id="stringMessageConvert" class="com.xg.test.game_test.activemq.convert.StringMessageConvert" />
 	
 </beans> 

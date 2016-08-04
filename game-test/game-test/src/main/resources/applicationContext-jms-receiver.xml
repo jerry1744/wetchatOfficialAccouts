@@ -8,28 +8,14 @@
     http://www.springframework.org/schema/context/spring-context-2.5.xsd "
 	default-autowire="byName">
 
-	<!-- JMS PTP MODEL -->
-	<!-- PTP connection factory -->
-	<bean id="rec_mqConnectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
-		<property name="brokerURL" value="${receiver.tcp.url}" />
-		<!-- <property name="brokerURL" value="vm://normandy.notify" /> -->
-		<property name="useAsyncSend" value="true" />
-		<property name="userName" value="${con.username}" />
-		<property name="password" value="${con.password}" />
-	</bean>
-	<!-- 定义消息队列 -->
-	<bean id="rec_topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
-		<constructor-arg value="${topicname}" />
-	</bean>
-
 	<!-- 消息接收方 -->
 	<bean id="messageReceiver" class="com.xg.test.game_test.activemq.receiver.ActivemqReceiver" />
 
 	<!-- 消息监听容器 -->
 	<bean id="listenerContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="rec_mqConnectionFactory" />
-		<property name="destination" ref="rec_topicDestination" />
+		<property name="connectionFactory" ref="mqConnectionFactory" />
+		<property name="destination" ref="topicDestination" />
 		<property name="messageListener" ref="messageReceiver" />
 	</bean>
 </beans> 
