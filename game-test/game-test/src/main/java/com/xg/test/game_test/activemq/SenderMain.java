@@ -2,7 +2,9 @@ package com.xg.test.game_test.activemq;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.xg.test.game_test.activemq.bean.NoticeBean;
 import com.xg.test.game_test.activemq.sender.ActivemqSender;
+import com.xg.test.game_test.log.MyLoggerFactory;
 
 /**
  * 发送测试端
@@ -18,17 +20,27 @@ public class SenderMain {
 		ActivemqSender sender = ActivemqSender.getInstance();
 		int index = 0;
 		long start = System.currentTimeMillis();
-		;
 		for (int i = 0; i < 100000; i++) {
 			long now = System.currentTimeMillis();
-			sender.senderMsg("this_is_a_message_for_test_and_no_is_" + i + "sender_time_is \t" + now);
-			if (now - start >= 1000) {
+			String messageContent = "this_is_a_message_for_test_and_no_is_" + i + "sender_time_is \t" + now;
+			sender.senderNoticeBeanMsg(createBean(i, messageContent));
+			if (now - start >= 10000) {
 				break;
 			}
-			Thread.sleep(1);
+			if (i % 2 == 0) {
+				Thread.sleep(1);
+			}
 			index++;
 		}
-		System.out.println(index);
+		MyLoggerFactory.commonLog.info("index is " + index);
 	}
 
+	private static NoticeBean createBean(int index, String messageContent) {
+		NoticeBean bean = new NoticeBean();
+		bean.setContent(messageContent);
+		bean.setId(index);
+		bean.setIndex(index);
+		bean.setType(10);
+		return bean;
+	}
 }

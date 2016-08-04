@@ -34,6 +34,7 @@
 	</bean>
 	
 	<!-- 消息转换器 -->
+	<bean id="noticeBeanMessageConvert" class="com.xg.test.game_test.activemq.convert.NoticeBeanMessageConvert"/>
 	<bean id="stringMessageConvert" class="com.xg.test.game_test.activemq.convert.StringMessageConvert" />
 	<!-- 自定义TransportListener -->
 	<bean id="myselfTransPortListener" class="com.xg.test.game_test.activemq.listener.MyTransprotListener"/>

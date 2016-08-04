@@ -12,7 +12,7 @@
 	<bean id="jmsTemplate_sender" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="sed_mqPoolConnectionFactory" />
 		<property name="defaultDestination" ref="topicDestination" />
-		<property name="messageConverter" ref="stringMessageConvert" />
+		<property name="messageConverter" ref="noticeBeanMessageConvert" />
 		<property name="pubSubDomain" value="true" />
 		<property name="explicitQosEnabled" value="true" />
 		<!-- deliveryMode, priority, timeToLive 的开关，要生效，必须配置为true，默认false-->  

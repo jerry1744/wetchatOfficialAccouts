@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
+import com.xg.test.game_test.activemq.bean.NoticeBean;
 import com.xg.test.game_test.spring.SpringContextContainer;
 
 /**
@@ -27,7 +28,11 @@ public class ActivemqSender {
 	@Qualifier("jmsTemplate_sender")
 	private JmsTemplate jmsTemplate;
 
-	public void senderMsg(String messageStr) throws JMSException {
+	public void senderStringMsg(String messageStr) throws JMSException {
 		jmsTemplate.convertAndSend(messageStr);
+	}
+	
+	public void senderNoticeBeanMsg(NoticeBean noticeBean){
+		jmsTemplate.convertAndSend(noticeBean);
 	}
 }
