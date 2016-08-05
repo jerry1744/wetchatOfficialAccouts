@@ -15,14 +15,18 @@
 
 		<!-- 主要依赖库的版本定义 -->
 		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
-		
+
 		<slf4j.version>1.7.13</slf4j.version>
 		<logback.version>1.1.3</logback.version>
-		
+
 		<org.apache.activemq.version>5.9.0</org.apache.activemq.version>
-		
-		
-		
+
+		<fastjson.version>1.2.7</fastjson.version>
+
+		<httpcore.version>4.4.4</httpcore.version>
+		<httpclient.version>4.5.1</httpclient.version>
+
+
 	</properties>
 
 	<dependencies>
@@ -180,15 +184,46 @@
 			<version>${org.apache.activemq.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.activemq</groupId>
-		  <artifactId>activemq-spring</artifactId>
-		  <version>${org.apache.activemq.version}</version>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-spring</artifactId>
+			<version>${org.apache.activemq.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.activemq</groupId>
-		  <artifactId>activemq-pool</artifactId>
-		  <version>${org.apache.activemq.version}</version>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>${org.apache.activemq.version}</version>
 		</dependency>
 
+		<!-- json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
+		<!-- http -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${httpcore.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 </project>
