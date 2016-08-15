@@ -15,7 +15,7 @@ public class StartMain {
 		ClassPathXmlApplicationContext classPathXmlApplicationContext = null;
 		Scanner scanner = null;
 		try {
-			//classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath*:applicationContext.xml");
+			classPathXmlApplicationContext = new ClassPathXmlApplicationContext("classpath*:applicationContext.xml");
 			System.out.println("please input any key to quit");
 			scanner = new Scanner(System.in);
 			String nextLine = scanner.nextLine();

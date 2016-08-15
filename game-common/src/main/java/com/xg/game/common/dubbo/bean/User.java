@@ -1,11 +1,15 @@
 package com.xg.game.common.dubbo.bean;
 
+import java.io.Serializable;
+
 /**
  *
  * @auther qikai
  * @date 2016年8月12日
  */
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 5972635654210551382L;
 
 	private int id;
 
